@@ -1,4 +1,5 @@
 import { Server } from "socket.io";
+import { socketAuth } from "../middleware/socketAuth.js";
 import registerSocketHandlers from "../controllers/socket.Controller.js";
 
 const initializeSocket = (server) => {
@@ -8,6 +9,7 @@ const initializeSocket = (server) => {
       credentials: true,
     },
   });
+  io.use(socketAuth);
   console.log("Socket.IO server initialized");
   registerSocketHandlers(io);
 
